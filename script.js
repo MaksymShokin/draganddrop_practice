@@ -43,6 +43,19 @@ const createList = () => {
 };
 createList();
 
+function checkOrder() {
+  listItems.forEach((item, index) => {
+    const movieName = item.querySelector('.draggable').innerText.trim();
+
+    if (movieName !== bestMovies[index]) {
+      item.classList.add('wrong')
+    } else {
+      item.classList.remove('wrong')
+      item.classList.add('right')
+    }
+  });
+}
+
 function addEventListeners() {
   const draggables = document.querySelectorAll('.draggable');
   const dragListItems = document.querySelectorAll('.draggable-list li');
@@ -84,9 +97,8 @@ function swapItems(fromIndex, toIndex) {
   const itemOne = listItems[fromIndex].querySelector('.draggable');
   const itemTwo = listItems[toIndex].querySelector('.draggable');
 
-  listItems[fromIndex].appendChild(itemTwo)
-  listItems[toIndex].appendChild(itemOne)
-
-
-  // console.log(itemOne, itemTwo);
+  listItems[fromIndex].appendChild(itemTwo);
+  listItems[toIndex].appendChild(itemOne);
 }
+
+check.addEventListener('click', checkOrder);
