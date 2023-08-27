@@ -29,7 +29,6 @@ body {
 .draggable-list li {
   background-color: #fff;
   display: flex;
-  height: 100%;
   flex: 1;
 }
 
@@ -50,7 +49,7 @@ body {
 .draggable-list .draggable {
   cursor: pointer;
   display: flex;
-  align-self: center;
+  align-items: center;
   justify-content: space-between;
   padding: 15px;
   flex: 1;

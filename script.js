@@ -38,5 +38,55 @@ const createList = () => {
       listItems.push(listItem);
       draggableList.appendChild(listItem);
     });
+
+  addEventListeners();
 };
 createList();
+
+function addEventListeners() {
+  const draggables = document.querySelectorAll('.draggable');
+  const dragListItems = document.querySelectorAll('.draggable-list li');
+
+  draggables.forEach(draggables => {
+    draggables.addEventListener('dragstart', dragStart);
+  });
+  dragListItems.forEach(draggables => {
+    draggables.addEventListener('dragover', dragOver);
+    draggables.addEventListener('drop', dragDrop);
+    draggables.addEventListener('dragenter', dragEnter);
+    draggables.addEventListener('dragleave', dragLeave);
+  });
+}
+
+function dragStart() {
+  dragStartIndex = +this.closest('li').getAttribute('data-index');
+}
+
+function dragOver(event) {
+  event.preventDefault();
+}
+
+function dragDrop() {
+  const dragEndIndex = +this.getAttribute('data-index');
+  swapItems(dragStartIndex, dragEndIndex);
+  this.classList.remove('over');
+}
+
+function dragEnter() {
+  this.classList.add('over');
+}
+
+function dragLeave() {
+  this.classList.remove('over');
+}
+
+function swapItems(fromIndex, toIndex) {
+  const itemOne = listItems[fromIndex].querySelector('.draggable');
+  const itemTwo = listItems[toIndex].querySelector('.draggable');
+
+  listItems[fromIndex].appendChild(itemTwo)
+  listItems[toIndex].appendChild(itemOne)
+
+
+  // console.log(itemOne, itemTwo);
+}
